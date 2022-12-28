@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+     - name: ensure nginx is stopped
+       service: name=nginx state=stopped
+     - name: Uninstall Package
+       yum: name=nginx state=absent
+     - name: Install Package
+       yum: name=nginx update_cache=true state=latest
+     - name: ensure nginx is running (and enable it at boot)
+       service: name=nginx state=started enabled=yes
